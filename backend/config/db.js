@@ -1,11 +1,16 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://TailorPro:admin123@cluster0.opezko1.mongodb.net/?appName=Cluster0');
+    if (!process.env.MONGO_URI) {
+      throw new Error("MONGO_URI is not set in environment variables");
+    }
+
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`Error connecting to MongoDB: ${error.message}`);
+    console.error("MongoDB Connection Error:", error.message);
     process.exit(1);
   }
 };
