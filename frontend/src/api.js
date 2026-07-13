@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5001/api',
+  baseURL: 'mongodb+srv://TailorPro:admin123@cluster0.opezko1.mongodb.net/?appName=Cluster0',
 });
 
 // Interceptor to inject JWT token in Authorization header
