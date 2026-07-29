@@ -6,6 +6,7 @@ import connectDB from './config/db.js';
 import adminRoutes from './routes/adminRoutes.js';
 import dressRoutes from './routes/dressRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import seedRoutes from './routes/seedRoutes.js';
 
 dotenv.config();
 
@@ -15,8 +16,20 @@ connectDB();
 const app = express();
 
 // Middlewares
+const allowedOrigins = (process.env.CORS_ORIGIN || '*')
+  .split(',')
+  .map(o => o.trim())
+  .filter(Boolean)
+  .map(o => (o !== '*' && !o.startsWith('http://') && !o.startsWith('https://') ? 'https://' + o : o));
+
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || '*',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 };
@@ -31,6 +44,7 @@ app.use('/uploads', express.static(path.resolve('uploads')));
 app.use('/api/admin', adminRoutes);
 app.use('/api/dresses', dressRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api', seedRoutes);
 
 // Base API route
 app.get('/', (req, res) => {
