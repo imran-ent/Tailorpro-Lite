@@ -1,8 +1,12 @@
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const api = axios.create({
-  baseURL: 'mongodb+srv://TailorPro:admin123@cluster0.opezko1.mongodb.net/?appName=Cluster0',
+  baseURL: API_BASE_URL + '/api',
 });
+
+export const BASE_URL = API_BASE_URL;
 
 // Interceptor to inject JWT token in Authorization header
 api.interceptors.request.use(

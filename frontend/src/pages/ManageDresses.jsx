@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import api from '../api';
+import api, { BASE_URL } from '../api';
 import AdminSidebar from '../components/AdminSidebar';
 import { ToastContext } from '../context/ToastContext';
 
@@ -232,7 +232,7 @@ const ManageDresses = () => {
                       <tr key={dress._id}>
                         <td>
                           <img
-                            src={`http://localhost:5000/${dress.image}`}
+                            src={`${BASE_URL}/${dress.image}`}
                             alt={dress.name}
                             className="table-thumbnail"
                             onError={(e) => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import api from '../api';
+import api, { BASE_URL } from '../api';
 import OrderStatus from '../components/OrderStatus';
 import { ToastContext } from '../context/ToastContext';
 
@@ -195,7 +195,7 @@ const LandingPage = () => {
               <div className="dress-card" key={dress._id}>
                 <div className="dress-image-wrapper">
                   <img
-                    src={`http://localhost:5000/${dress.image}`}
+                    src={`${BASE_URL}/${dress.image}`}
                     alt={dress.name}
                     className="dress-image"
                     onError={(e) => {
