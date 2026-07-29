@@ -16,24 +16,10 @@ connectDB();
 const app = express();
 
 // Middlewares
-const allowedOrigins = (process.env.CORS_ORIGIN || '*')
-  .split(',')
-  .map(o => o.trim())
-  .filter(Boolean)
-  .map(o => (o !== '*' && !o.startsWith('http://') && !o.startsWith('https://') ? 'https://' + o : o));
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error(`Origin ${origin} not allowed by CORS`));
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+app.use(cors({
+  origin: true,
   credentials: true,
-};
-app.use(cors(corsOptions));
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
