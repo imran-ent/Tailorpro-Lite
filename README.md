@@ -1,4 +1,4 @@
-# TailorPro - FuLL-Stack Tailoring Management Website
+# TailorPro - FULL-Stack Tailoring Management Website
 
 A modern, responsive, and professional tailoring management website built using the MERN stack (React, Node.js, Express.js, MongoDB).
 
